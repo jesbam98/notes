@@ -8,7 +8,7 @@ module.exports = {
     development: {
         db: {
             dialect: 'sqlite',
-            storage: ':memory',
+            storage: ':memory:',
             operatorsAliases: false,
         },
     },
