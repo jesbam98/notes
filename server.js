@@ -1,15 +1,18 @@
-const Hapi = require('@hapi/hapi');
+'use strict';
+
 const Path = require('path');
 const Pug = require('pug');
+const Hapi = require('@hapi/hapi');
 const Vision = require('@hapi/vision');
+const Inert = require('@hapi/inert');
 const Models = require('./lib/models/');
 const Routes = require('./lib/routes');
 const Settings = require('./settings');
+
 const server = new Hapi.Server({ port: Settings.port });
 
-
 const init = async () => {
-    await server.register([ Vision ]);
+    await server.register([ Vision, Inert ]);
     
     server.views({
         engines: { pug: Pug },
@@ -21,7 +24,7 @@ const init = async () => {
     });
     
     server.route(Routes);
-    
+
     await server.start();
     console.log(`Server running at: ${server.info.uri}`)
 };
