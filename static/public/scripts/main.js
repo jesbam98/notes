@@ -1,4 +1,6 @@
-$('#note-form').submit(function (e) {
+var $noteForm = $('#note-form');
+
+$noteForm.submit(function (e) {
   e.preventDefault();
 
   var form = {
@@ -15,10 +17,10 @@ $('#note-form').submit(function (e) {
 
       if (form.type === 'POST') {
         $('.notes-list').prepend(result);
+        $noteForm.find('input[type=text], textarea').val('');
       } else if (form.type === 'PUT') {
         $('.note-content').html(result);
       }
-
     }
   });
 });
